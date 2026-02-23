@@ -1,0 +1,10 @@
+﻿html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #07111f;
+  color: #e7edf3;
+}

@@ -1,0 +1,242 @@
+﻿<main class="page-shell">
+  <header class="top-bar">
+    <nav #topNav class="top-nav" aria-label="Secciones">
+      <span
+        class="nav-indicator"
+        [class.is-visible]="navIndicatorWidth() > 0"
+        [style.transform]="'translateX(' + navIndicatorLeft() + 'px)'"
+        [style.width.px]="navIndicatorWidth()"
+        aria-hidden="true"
+      ></span>
+
+      @for (item of navItems; track item.id) {
+        <a
+          class="top-nav-link"
+          [href]="'#' + item.id"
+          [class.is-active]="activeSection() === item.id"
+          (click)="setActiveSection(item.id)"
+        >
+          {{ item.label }}
+        </a>
+      }
+
+      <a class="top-nav-cta" href="#contacto">Presupuesto</a>
+    </nav>
+  </header>
+
+  <section class="panel hero" id="inicio">
+    <div class="panel-content hero-layout reveal-on-scroll is-visible" data-reveal>
+      <div>
+        <p class="eyebrow">Servicio tecnico informatico</p>
+        <h1 class="brand-title">
+          <span class="brand-main">Informatica Integral</span>
+          <span class="brand-badge">MDQ</span>
+        </h1>
+        <p class="lead">
+          Reparacion, mantenimiento y soporte tecnico para computadoras, notebooks y redes.
+          Una sola pagina, scroll continuo, toda la informacion en orden.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contacto">Pedir presupuesto</a>
+          <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
+        </div>
+        <div class="hero-badges" aria-label="Ventajas">
+          @for (item of highlights; track item) {
+            <span>{{ item }}</span>
+          }
+        </div>
+      </div>
+
+      <aside
+        class="hero-card reveal-on-scroll"
+        data-reveal
+        style="--reveal-delay: 120ms"
+        aria-label="Resumen de servicio"
+      >
+        <div class="status-pill">Atencion activa</div>
+        <h2>Diagnostico rapido</h2>
+        <p>
+          Equipos lentos, errores de inicio, pantallas azules, problemas de red y limpieza de virus.
+        </p>
+
+        <div class="stat-grid" aria-label="Indicadores de servicio">
+          @for (stat of heroStats; track stat.label) {
+            <div class="stat-box">
+              <span class="stat-value">{{ stat.value }}</span>
+              <span class="stat-label">{{ stat.label }}</span>
+            </div>
+          }
+        </div>
+
+        <ul class="hero-checks">
+          @for (item of heroChecks; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="panel" id="servicios">
+    <div class="panel-content narrow reveal-on-scroll" data-reveal>
+      <p class="eyebrow">Que hacemos</p>
+      <h2>Servicios principales</h2>
+      <p class="lead">
+        Este bloque es el segundo panel del scroll. Cada seccion ocupa la pantalla completa para una navegacion vertical fluida.
+      </p>
+      <div class="cards-grid">
+        @for (service of services; track service.title; let i = $index) {
+          <article class="service-card reveal-on-scroll" data-reveal [style.--reveal-delay]="(i * 70 + 60) + 'ms'">
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="panel accent" id="soluciones">
+    <div class="panel-content split reveal-on-scroll" data-reveal>
+      <div>
+        <p class="eyebrow">Problemas frecuentes</p>
+        <h2>Soluciones para hogares y negocios</h2>
+        <p class="lead">
+          Armamos una seccion pensada para mostrar casos reales: equipos lentos, internet inestable, backups y puesta a punto.
+        </p>
+      </div>
+      <ul class="check-list reveal-on-scroll" data-reveal style="--reveal-delay: 100ms">
+        <li>Formateo y reinstalacion de sistema operativo</li>
+        <li>Recuperacion basica de archivos</li>
+        <li>Configuracion de correo e impresoras</li>
+        <li>Mejora de rendimiento con SSD y memoria</li>
+        <li>Mantenimiento preventivo mensual</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="panel" id="proceso">
+    <div class="panel-content narrow reveal-on-scroll" data-reveal>
+      <p class="eyebrow">Como trabajamos</p>
+      <h2>Proceso simple y claro</h2>
+      <ol class="steps">
+        @for (step of process; track step; let i = $index) {
+          <li class="reveal-on-scroll" data-reveal [style.--reveal-delay]="(i * 65 + 50) + 'ms'">
+            <span class="step-number">{{ i + 1 }}</span>
+            <p>{{ step }}</p>
+          </li>
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="panel contact" id="contacto">
+    <div class="panel-content contact-layout reveal-on-scroll" data-reveal>
+      <div class="contact-copy">
+        <p class="eyebrow">Contacto</p>
+        <h2>Consultanos y te respondemos con un presupuesto inicial</h2>
+        <p class="lead">
+          Dejo un formulario real con validaciones para que el esqueleto quede listo. Luego afinamos los textos comerciales y el flujo final de envio.
+        </p>
+      </div>
+
+      <div class="contact-stack">
+        <form
+          class="contact-form-card reveal-on-scroll"
+          data-reveal
+          style="--reveal-delay: 80ms"
+          [formGroup]="contactForm"
+          (ngSubmit)="onContactSubmit()"
+          (input)="clearSubmitSuccess()"
+          novalidate
+        >
+          <div class="form-header">
+            <h3>Solicitar presupuesto</h3>
+            <p>Completa tus datos y una breve descripcion del problema.</p>
+          </div>
+
+          <div class="form-grid">
+            <label class="field" [class.has-error]="contactControls.nombre.invalid && (contactControls.nombre.touched || submitAttempted())">
+              <span>Nombre</span>
+              <input type="text" formControlName="nombre" placeholder="Tu nombre" autocomplete="name" />
+              @if (contactControls.nombre.invalid && (contactControls.nombre.touched || submitAttempted())) {
+                <small class="field-error">Ingresa un nombre valido (minimo 2 caracteres).</small>
+              }
+            </label>
+
+            <label class="field" [class.has-error]="contactControls.telefono.invalid && (contactControls.telefono.touched || submitAttempted())">
+              <span>Telefono / WhatsApp</span>
+              <input type="tel" formControlName="telefono" placeholder="223 ..." autocomplete="tel" />
+              @if (contactControls.telefono.invalid && (contactControls.telefono.touched || submitAttempted())) {
+                <small class="field-error">Ingresa un telefono para contactarte.</small>
+              }
+            </label>
+
+            <label class="field" [class.has-error]="contactControls.email.invalid && (contactControls.email.touched || submitAttempted())">
+              <span>Email</span>
+              <input type="email" formControlName="email" placeholder="nombre@correo.com" autocomplete="email" />
+              @if (contactControls.email.invalid && (contactControls.email.touched || submitAttempted())) {
+                <small class="field-error">Ingresa un email valido.</small>
+              }
+            </label>
+
+            <label class="field" [class.has-error]="contactControls.servicio.invalid && (contactControls.servicio.touched || submitAttempted())">
+              <span>Servicio</span>
+              <select formControlName="servicio">
+                <option value="Diagnostico general">Diagnostico general</option>
+                @for (service of services; track service.title) {
+                  <option [value]="service.title">{{ service.title }}</option>
+                }
+                <option value="Otro">Otro</option>
+              </select>
+            </label>
+
+            <label class="field field-full" [class.has-error]="contactControls.mensaje.invalid && (contactControls.mensaje.touched || submitAttempted())">
+              <span>Mensaje</span>
+              <textarea
+                rows="4"
+                formControlName="mensaje"
+                placeholder="Contanos que problema tiene el equipo o que servicio necesitas..."
+              ></textarea>
+              @if (contactControls.mensaje.invalid && (contactControls.mensaje.touched || submitAttempted())) {
+                <small class="field-error">Describe el problema con al menos 12 caracteres.</small>
+              }
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Enviar consulta</button>
+            <p class="form-note">Este envio es de demostracion (sin backend por ahora).</p>
+          </div>
+
+          @if (submitSuccess()) {
+            <p class="form-success" role="status" aria-live="polite">
+              Consulta registrada localmente. En el siguiente paso lo conectamos a email o WhatsApp.
+            </p>
+          }
+        </form>
+
+        <div class="contact-card reveal-on-scroll" data-reveal style="--reveal-delay: 140ms">
+          <p><strong>WhatsApp:</strong> +54 9 223 000 0000</p>
+          <p><strong>Email:</strong> contacto@informaticaintegralmdq.com</p>
+          <p><strong>Horario:</strong> Lun a Sab - 9:00 a 18:00</p>
+          <a class="btn btn-secondary full" href="#inicio">Volver arriba</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <a
+    class="whatsapp-fab"
+    href="https://wa.me/5492230000000?text=Hola%20quiero%20consultar%20por%20servicio%20tecnico"
+    target="_blank"
+    rel="noopener"
+    aria-label="Abrir WhatsApp para consultar servicio tecnico"
+  >
+    <span class="wa-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20.52 3.48A11.88 11.88 0 0 0 12.06 0C5.52 0 .18 5.28.18 11.82c0 2.1.54 4.14 1.62 5.94L0 24l6.42-1.74a11.77 11.77 0 0 0 5.64 1.44h.06c6.54 0 11.88-5.28 11.88-11.82 0-3.18-1.26-6.18-3.48-8.4Zm-8.4 18.24h-.06a9.85 9.85 0 0 1-5.04-1.38l-.36-.18-3.78 1.02 1.02-3.66-.24-.36a9.86 9.86 0 0 1-1.5-5.28C2.16 6.36 6.66 1.92 12.06 1.92c2.64 0 5.1 1.02 6.96 2.88a9.78 9.78 0 0 1 2.88 6.96c0 5.46-4.44 9.9-9.78 9.96Zm5.4-7.38c-.3-.18-1.8-.9-2.1-1.02-.3-.12-.48-.18-.72.18-.18.3-.72 1.02-.9 1.2-.18.24-.3.24-.6.06-.3-.18-1.2-.42-2.28-1.38-.84-.72-1.38-1.62-1.56-1.92-.18-.3 0-.42.12-.6.12-.12.3-.3.42-.48.12-.18.18-.3.3-.48.12-.24.06-.42 0-.6-.06-.12-.72-1.74-.96-2.4-.24-.6-.54-.54-.72-.54h-.6c-.18 0-.54.06-.78.3-.3.3-1.08 1.02-1.08 2.52s1.08 2.94 1.2 3.18c.18.24 2.16 3.3 5.16 4.62.72.3 1.26.48 1.68.6.72.24 1.32.18 1.8.12.54-.06 1.8-.72 2.04-1.44.3-.72.3-1.32.18-1.44-.06-.12-.24-.18-.54-.36Z" />
+      </svg>
+    </span>
+    <span class="wa-label">WhatsApp</span>
+  </a>
+</main>
