@@ -66,40 +66,22 @@ export class App implements AfterViewInit, OnDestroy {
 
   protected readonly clients = [
     {
-      name: 'Panaderia Puerto Norte',
-      category: 'Comercio',
-      work: 'Puesta a punto de equipos de caja, impresora y red Wi-Fi.',
-      image: 'clientes/panaderia-puerto-norte.svg'
+      name: 'Farmacias Riadigos',
+      category: 'Salud',
+      work: 'Redes estructuradas, cyberseguridad y mantenimiento de equipos informaticos en sus 14 sucursales.',
+      image: 'clientes/riadigos.png'
     },
     {
-      name: 'Estudio Costa Legal',
-      category: 'Estudio profesional',
-      work: 'Mantenimiento preventivo de notebooks y respaldo local de archivos.',
-      image: 'clientes/estudio-costa-legal.svg'
+      name: 'Farmacias Palkin',
+      category: 'Salud',
+      work: 'Redes estructuradas, cyberseguridad y mantenimiento de equipos informaticos en sus 3 sucursales.',
+      image: 'clientes/palkin2.jpg'
     },
     {
       name: 'Hotel Atlantico MDQ',
       category: 'Hoteleria',
       work: 'Optimización de PC de recepcion y configuracion de red interna.',
       image: 'clientes/hotel-atlantico-mdq.svg'
-    },
-    {
-      name: 'Taller Rivadavia',
-      category: 'PyME',
-      work: 'Recambio a SSD, limpieza interna y mejora general de rendimiento.',
-      image: 'clientes/taller-rivadavia.svg'
-    },
-    {
-      name: 'Clinica Del Faro',
-      category: 'Salud',
-      work: 'Soporte de impresoras, correo y estaciones administrativas.',
-      image: 'clientes/clinica-del-faro.svg'
-    },
-    {
-      name: 'Inmobiliaria Mar Sur',
-      category: 'Servicios',
-      work: 'Configuracion de equipos nuevos y asistencia remota recurrente.',
-      image: 'clientes/inmobiliaria-mar-sur.svg'
     }
   ];
 
