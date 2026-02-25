@@ -114,18 +114,30 @@
     </div>
   </section>
 
-  <section class="panel" id="proceso">
+  <section class="panel" id="clientes">
     <div class="panel-content narrow reveal-on-scroll" data-reveal>
-      <p class="eyebrow">Como trabajamos</p>
-      <h2>Proceso simple y claro</h2>
-      <ol class="steps">
-        @for (step of process; track step; let i = $index) {
-          <li class="reveal-on-scroll" data-reveal [style.--reveal-delay]="(i * 65 + 50) + 'ms'">
-            <span class="step-number">{{ i + 1 }}</span>
-            <p>{{ step }}</p>
-          </li>
+      <p class="eyebrow">Clientes</p>
+      <h2>Empresas y profesionales que confiaron en nosotros</h2>
+      <p class="lead">
+        Una muestra de clientes y rubros con los que ya trabajamos en soporte, mantenimiento y puesta a punto
+        de equipos. Podes reemplazar estas imagenes por fotos o logos reales cuando quieras.
+      </p>
+
+      <div class="clients-grid">
+        @for (client of clients; track client.name; let i = $index) {
+          <article class="client-card reveal-on-scroll" data-reveal [style.--reveal-delay]="(i * 70 + 50) + 'ms'">
+            <div class="client-media">
+              <img [src]="client.image" [alt]="'Imagen del cliente ' + client.name" loading="lazy" decoding="async" />
+            </div>
+
+            <div class="client-body">
+              <span class="client-chip">{{ client.category }}</span>
+              <h3>{{ client.name }}</h3>
+              <p class="client-work">{{ client.work }}</p>
+            </div>
+          </article>
         }
-      </ol>
+      </div>
     </div>
   </section>
 

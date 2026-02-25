@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Panaderia Puerto Norte</title>
+  <desc id="desc">Imagen placeholder para cliente Panaderia Puerto Norte.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1f36" />
+      <stop offset="55%" stop-color="#103a5e" />
+      <stop offset="100%" stop-color="#11906c" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#bg)" />
+  <circle cx="110" cy="96" r="82" fill="#8fd0ff" opacity="0.18" />
+  <circle cx="550" cy="320" r="118" fill="#00d68f" opacity="0.14" />
+  <rect x="22" y="22" width="596" height="356" rx="24" fill="none" stroke="#d8ecff" stroke-opacity="0.18" />
+  <text x="42" y="78" fill="#d8ecff" fill-opacity="0.9" font-size="26" font-family="Segoe UI, sans-serif">Panaderia Puerto Norte</text>
+  <text x="42" y="112" fill="#d8ecff" fill-opacity="0.62" font-size="16" font-family="Segoe UI, sans-serif">Comercio</text>
+  <text x="320" y="244" text-anchor="middle" fill="#f2fbff" font-size="132" font-weight="700" font-family="Segoe UI, sans-serif">PN</text>
+</svg>

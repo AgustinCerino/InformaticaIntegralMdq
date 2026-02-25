@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Inmobiliaria Mar Sur</title>
+  <desc id="desc">Imagen placeholder para cliente Inmobiliaria Mar Sur.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071321" />
+      <stop offset="55%" stop-color="#113251" />
+      <stop offset="100%" stop-color="#12846e" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#bg)" />
+  <path d="M70 310 L180 214 L290 310 Z" fill="#8fd0ff" fill-opacity="0.13" />
+  <path d="M222 310 L344 186 L470 310 Z" fill="#00d68f" fill-opacity="0.1" />
+  <path d="M368 310 L476 228 L570 310 Z" fill="#d8ecff" fill-opacity="0.1" />
+  <rect x="22" y="22" width="596" height="356" rx="24" fill="none" stroke="#d8ecff" stroke-opacity="0.18" />
+  <text x="42" y="78" fill="#d8ecff" fill-opacity="0.9" font-size="26" font-family="Segoe UI, sans-serif">Inmobiliaria Mar Sur</text>
+  <text x="42" y="112" fill="#d8ecff" fill-opacity="0.62" font-size="16" font-family="Segoe UI, sans-serif">Servicios</text>
+  <text x="320" y="244" text-anchor="middle" fill="#f2fbff" font-size="132" font-weight="700" font-family="Segoe UI, sans-serif">MS</text>
+</svg>
