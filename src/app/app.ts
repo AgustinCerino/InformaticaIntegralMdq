@@ -68,20 +68,26 @@ export class App implements AfterViewInit, OnDestroy {
     {
       name: 'Farmacias Riadigos',
       category: 'Salud',
-      work: 'Redes estructuradas, cyberseguridad y mantenimiento de equipos informaticos en sus 14 sucursales.',
+      work: '',
       image: 'clientes/riadigos.png'
     },
     {
       name: 'Farmacias Palkin',
       category: 'Salud',
-      work: 'Redes estructuradas, cyberseguridad y mantenimiento de equipos informaticos en sus 3 sucursales.',
+      work: '',
       image: 'clientes/palkin2.jpg'
     },
     {
-      name: 'Hotel Atlantico MDQ',
+      name: 'Hotel Club del Golf',
       category: 'Hoteleria',
-      work: 'Optimización de PC de recepcion y configuracion de red interna.',
-      image: 'clientes/hotel-atlantico-mdq.svg'
+      work: '',
+      image: 'clientes/clubdelgolfhotel.jpg'
+    },
+        {
+      name: 'Coomarpes',
+      category: 'Pesca',
+      work: '',
+      image: 'clientes/coomarpes.png'
     }
   ];
 
