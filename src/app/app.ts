@@ -1,4 +1,4 @@
-﻿import {
+import {
   AfterViewInit,
   Component,
   ElementRef,
@@ -9,7 +9,9 @@
   inject,
   signal,
 } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +24,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class App implements AfterViewInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
+  private readonly http = inject(HttpClient);
   private readonly hostElement = inject(ElementRef<HTMLElement>);
   private sectionObserver?: IntersectionObserver;
   private revealObserver?: IntersectionObserver;
@@ -36,6 +39,8 @@ export class App implements AfterViewInit, OnDestroy {
   protected readonly navIndicatorWidth = signal(0);
   protected readonly submitAttempted = signal(false);
   protected readonly submitSuccess = signal(false);
+  protected readonly submitError = signal('');
+  protected readonly isSubmitting = signal(false);
 
   protected readonly navItems = [
     { id: 'inicio', label: 'Inicio' },
@@ -230,27 +235,45 @@ export class App implements AfterViewInit, OnDestroy {
     if (this.submitSuccess()) {
       this.submitSuccess.set(false);
     }
+
+    if (this.submitError()) {
+      this.submitError.set('');
+    }
   }
 
-  protected onContactSubmit(): void {
+  protected async onContactSubmit(): Promise<void> {
+    if (this.isSubmitting()) {
+      return;
+    }
+
     this.submitAttempted.set(true);
     this.submitSuccess.set(false);
+    this.submitError.set('');
     this.contactForm.markAllAsTouched();
 
     if (this.contactForm.invalid) {
       return;
     }
 
-    this.submitSuccess.set(true);
-    this.submitAttempted.set(false);
+    this.isSubmitting.set(true);
 
-    this.contactForm.reset({
-      nombre: '',
-      telefono: '',
-      email: '',
-      servicio: 'Diagnostico general',
-      mensaje: ''
-    });
+    try {
+      await firstValueFrom(this.http.post('/api/contact', this.contactForm.getRawValue()));
+
+      this.submitSuccess.set(true);
+      this.submitAttempted.set(false);
+      this.contactForm.reset({
+        nombre: '',
+        telefono: '',
+        email: '',
+        servicio: 'Diagnostico general',
+        mensaje: '',
+      });
+    } catch {
+      this.submitError.set('No se pudo enviar la consulta. Intenta de nuevo en unos minutos.');
+    } finally {
+      this.isSubmitting.set(false);
+    }
   }
 
   private queueNavIndicatorUpdate(): void {
@@ -286,3 +309,4 @@ export class App implements AfterViewInit, OnDestroy {
     this.navIndicatorWidth.set(activeLink.offsetWidth);
   }
 }
+

@@ -358,6 +358,12 @@ h3 {
   outline: none;
 }
 
+.btn:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .btn-primary {
   color: #07111f;
   background: linear-gradient(135deg, #8fd0ff, #00d68f);
@@ -677,6 +683,17 @@ h3 {
   color: #d8fff0;
   background: rgba(0, 214, 143, 0.1);
   border: 1px solid rgba(0, 214, 143, 0.22);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.form-error {
+  margin: 0.85rem 0 0;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.75rem;
+  color: #ffd9d9;
+  background: rgba(255, 120, 120, 0.12);
+  border: 1px solid rgba(255, 120, 120, 0.3);
   font-size: 0.86rem;
   line-height: 1.45;
 }

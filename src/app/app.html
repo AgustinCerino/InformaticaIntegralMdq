@@ -119,8 +119,7 @@
       <p class="eyebrow">Clientes</p>
       <h2>Empresas y profesionales que confiaron en nosotros</h2>
       <p class="lead">
-        Una muestra de clientes y rubros con los que ya trabajamos en soporte, mantenimiento y puesta a punto
-        de equipos. Podes reemplazar estas imagenes por fotos o logos reales cuando quieras.
+
       </p>
 
       <div class="clients-grid">
@@ -147,7 +146,6 @@
         <p class="eyebrow">Contacto</p>
         <h2>Consultanos y te respondemos con un presupuesto inicial</h2>
         <p class="lead">
-          Dejo un formulario real con validaciones para que el esqueleto quede listo. Luego afinamos los textos comerciales y el flujo final de envio.
         </p>
       </div>
 
@@ -216,20 +214,28 @@
           </div>
 
           <div class="form-actions">
-            <button class="btn btn-primary" type="submit">Enviar consulta</button>
-            <p class="form-note">Este envio es de demostracion (sin backend por ahora).</p>
+            <button class="btn btn-primary" type="submit" [disabled]="isSubmitting()">
+              {{ isSubmitting() ? 'Enviando...' : 'Enviar consulta' }}
+            </button>
+            <p class="form-note">La consulta se envia por correo a informaticaintegralmdq@gmail.com.</p>
           </div>
 
           @if (submitSuccess()) {
             <p class="form-success" role="status" aria-live="polite">
-              Consulta registrada localmente. En el siguiente paso lo conectamos a email o WhatsApp.
+              Consulta enviada correctamente. Te responderemos a la brevedad.
+            </p>
+          }
+
+          @if (submitError()) {
+            <p class="form-error" role="alert">
+              {{ submitError() }}
             </p>
           }
         </form>
 
         <div class="contact-card reveal-on-scroll" data-reveal style="--reveal-delay: 140ms">
-          <p><strong>WhatsApp:</strong> +54 9 223 000 0000</p>
-          <p><strong>Email:</strong> contacto@informaticaintegralmdq.com</p>
+          <p><strong>WhatsApp:</strong> +54 9 223 521 6153 / +54 9 223 594 6687</p>
+          <p><strong>Email:</strong> informaticaintegralmdq@gmail.com</p>
           <p><strong>Horario:</strong> Lun a Sab - 9:00 a 18:00</p>
           <a class="btn btn-secondary full" href="#inicio">Volver arriba</a>
         </div>
@@ -237,13 +243,13 @@
     </div>
   </section>
 
-  <a
-    class="whatsapp-fab"
-    href="https://wa.me/5492230000000?text=Hola%20quiero%20consultar%20por%20servicio%20tecnico"
-    target="_blank"
-    rel="noopener"
-    aria-label="Abrir WhatsApp para consultar servicio tecnico"
-  >
+<a
+  class="whatsapp-fab"
+  href="https://api.whatsapp.com/send?phone=5492235216153&text=Hola%2C%20vengo%20de%20su%20pagina%20web%20y%20me%20gustar%C3%ADa%20recibir%20asesoramiento%20sobre%20una%20soluci%C3%B3n%20para%20mi%20equipo%20o%20empresa.%20%C2%BFPodr%C3%ADan%20ayudarme%3F"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Abrir WhatsApp para consultar"
+>
     <span class="wa-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path d="M20.52 3.48A11.88 11.88 0 0 0 12.06 0C5.52 0 .18 5.28.18 11.82c0 2.1.54 4.14 1.62 5.94L0 24l6.42-1.74a11.77 11.77 0 0 0 5.64 1.44h.06c6.54 0 11.88-5.28 11.88-11.82 0-3.18-1.26-6.18-3.48-8.4Zm-8.4 18.24h-.06a9.85 9.85 0 0 1-5.04-1.38l-.36-.18-3.78 1.02 1.02-3.66-.24-.36a9.86 9.86 0 0 1-1.5-5.28C2.16 6.36 6.66 1.92 12.06 1.92c2.64 0 5.1 1.02 6.96 2.88a9.78 9.78 0 0 1 2.88 6.96c0 5.46-4.44 9.9-9.78 9.96Zm5.4-7.38c-.3-.18-1.8-.9-2.1-1.02-.3-.12-.48-.18-.72.18-.18.3-.72 1.02-.9 1.2-.18.24-.3.24-.6.06-.3-.18-1.2-.42-2.28-1.38-.84-.72-1.38-1.62-1.56-1.92-.18-.3 0-.42.12-.6.12-.12.3-.3.42-.48.12-.18.18-.3.3-.48.12-.24.06-.42 0-.6-.06-.12-.72-1.74-.96-2.4-.24-.6-.54-.54-.72-.54h-.6c-.18 0-.54.06-.78.3-.3.3-1.08 1.02-1.08 2.52s1.08 2.94 1.2 3.18c.18.24 2.16 3.3 5.16 4.62.72.3 1.26.48 1.68.6.72.24 1.32.18 1.8.12.54-.06 1.8-.72 2.04-1.44.3-.72.3-1.32.18-1.44-.06-.12-.24-.18-.54-.36Z" />

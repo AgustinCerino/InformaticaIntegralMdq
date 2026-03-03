@@ -57,3 +57,13 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Configurar envio de consultas por correo
+
+El formulario `Contacto` ahora envia los datos a `POST /api/contact` en el servidor SSR.
+
+Variables de entorno requeridas para Gmail SMTP:
+
+- `SMTP_USER`: cuenta Gmail remitente (por ejemplo `informaticaintegralmdq@gmail.com`)
+- `SMTP_PASS`: App Password de Gmail (no la clave normal)
+- `CONTACT_FORM_TO` (opcional): casilla destino. Si no se define, usa `informaticaintegralmdq@gmail.com`
