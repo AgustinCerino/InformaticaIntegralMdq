@@ -67,3 +67,5 @@ Variables de entorno requeridas para Gmail SMTP:
 - `SMTP_USER`: cuenta Gmail remitente (por ejemplo `informaticaintegralmdq@gmail.com`)
 - `SMTP_PASS`: App Password de Gmail (no la clave normal)
 - `CONTACT_FORM_TO` (opcional): casilla destino. Si no se define, usa `informaticaintegralmdq@gmail.com`
+
+En Vercel, el endpoint de formulario esta implementado en `api/contact.js`.
