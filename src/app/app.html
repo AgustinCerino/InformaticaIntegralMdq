@@ -115,7 +115,15 @@
             data-reveal
             [style.--reveal-delay]="(i * 90 + 100) + 'ms'"
           >
-            <p class="cert-code">{{ certification.code }}</p>
+            <div class="cert-logo-wrap">
+              <img
+                class="cert-logo"
+                [src]="certification.logo"
+                [alt]="'Logo de certificación ' + certification.code"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
             <h3>{{ certification.title }}</h3>
             <p class="cert-summary">{{ certification.summary }}</p>
 
@@ -139,22 +147,44 @@
         del cliente y queda documentada para facilitar soporte y crecimiento.
       </p>
 
-      <div class="clients-grid">
-        @for (client of clients; track client.name; let i = $index) {
-          <article class="client-card reveal-on-scroll" data-reveal [style.--reveal-delay]="(i * 70 + 50) + 'ms'">
-            <div class="client-media">
-              <img [src]="client.image" [alt]="'Imagen del cliente ' + client.name" loading="lazy" decoding="async" />
-            </div>
+      <div class="clients-carousel" aria-label="Clientes destacados">
+        <div class="clients-track">
+          <div class="clients-track-group">
+            @for (client of clients; track client.name) {
+              <article class="client-card">
+                <div class="client-media">
+                  <img [src]="client.image" [alt]="'Imagen del cliente ' + client.name" loading="lazy" decoding="async" />
+                </div>
 
-            <div class="client-body">
-              <span class="client-chip">{{ client.category }}</span>
-              <h3>{{ client.name }}</h3>
-              @if (client.work) {
-                <p class="client-work">{{ client.work }}</p>
-              }
-            </div>
-          </article>
-        }
+                <div class="client-body">
+                  <span class="client-chip">{{ client.category }}</span>
+                  <h3>{{ client.name }}</h3>
+                  @if (client.work) {
+                    <p class="client-work">{{ client.work }}</p>
+                  }
+                </div>
+              </article>
+            }
+          </div>
+
+          <div class="clients-track-group" aria-hidden="true">
+            @for (client of clients; track client.name) {
+              <article class="client-card">
+                <div class="client-media">
+                  <img [src]="client.image" alt="" loading="lazy" decoding="async" />
+                </div>
+
+                <div class="client-body">
+                  <span class="client-chip">{{ client.category }}</span>
+                  <h3>{{ client.name }}</h3>
+                  @if (client.work) {
+                    <p class="client-work">{{ client.work }}</p>
+                  }
+                </div>
+              </article>
+            }
+          </div>
+        </div>
       </div>
     </div>
   </section>

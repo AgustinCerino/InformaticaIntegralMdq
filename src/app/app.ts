@@ -100,6 +100,7 @@ export class App implements AfterViewInit, OnDestroy {
     {
       title: 'MikroTik Certified Network Associate',
       code: 'MTCNA',
+      logo: 'certificaciones/mikrotik-mtcna.svg',
       summary: 'Base sólida en operación y arquitectura de redes MikroTik.',
       topics: [
         'Configuración de routers MikroTik',
@@ -113,6 +114,7 @@ export class App implements AfterViewInit, OnDestroy {
     {
       title: 'MikroTik Certified Security Engineer',
       code: 'MTCSE',
+      logo: 'certificaciones/mikrotik-mtcse.svg',
       summary: 'Implementación de controles avanzados de seguridad de red.',
       topics: [
         'Firewalls avanzados y políticas por riesgo',
