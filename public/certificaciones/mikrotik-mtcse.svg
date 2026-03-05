@@ -1,20 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 320" role="img" aria-labelledby="title desc">
   <title id="title">MikroTik MTCSE</title>
-  <desc id="desc">Logo de certificacion MikroTik Certified Security Engineer.</desc>
+  <desc id="desc">Insignia de certificación MikroTik MTCSE.</desc>
   <defs>
-    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#8fd0ff"/>
-      <stop offset="100%" stop-color="#00d68f"/>
-    </linearGradient>
+    <clipPath id="badge-clip">
+      <rect x="8" y="8" width="604" height="304" rx="56" ry="56"/>
+    </clipPath>
   </defs>
-  <rect x="0" y="0" width="520" height="120" rx="14" fill="#0b1b31"/>
-  <g fill="none" stroke="url(#g2)" stroke-width="4">
-    <path d="M54 62l16-28h32l16 28-16 28H70z"/>
-    <path d="M70 62h32"/>
-    <path d="M86 34v56"/>
+
+  <rect x="8" y="8" width="604" height="304" rx="56" ry="56" fill="#ffffff" stroke="#8f2a1f" stroke-width="8"/>
+  <rect x="8" y="178" width="604" height="134" fill="#96261e" clip-path="url(#badge-clip)"/>
+
+  <g transform="translate(62 56)" fill="none" stroke="#1f1f24" stroke-width="6" stroke-linecap="round">
+    <path d="M148 16c9 16 23 26 41 31"/>
+    <path d="M160 6c9 15 22 25 38 30"/>
+    <path d="M172 -4c9 14 21 23 36 28"/>
   </g>
-  <text x="140" y="54" fill="#e8f4ff" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700">MikroTik</text>
-  <text x="140" y="84" fill="#8fd0ff" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Certified Security Engineer</text>
-  <rect x="415" y="36" width="80" height="48" rx="24" fill="url(#g2)"/>
-  <text x="455" y="67" text-anchor="middle" fill="#082033" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="800">MTCSE</text>
+
+  <text
+    x="308"
+    y="142"
+    text-anchor="middle"
+    fill="#1f1f24"
+    font-family="Segoe UI, Arial, sans-serif"
+    font-size="84"
+    font-style="italic"
+    font-weight="700"
+    letter-spacing="-1.2"
+  >
+    MikroTik
+  </text>
+
+  <text
+    x="308"
+    y="264"
+    text-anchor="middle"
+    fill="#ffffff"
+    font-family="Segoe UI, Arial, sans-serif"
+    font-size="78"
+    font-weight="400"
+    letter-spacing="3.8"
+  >
+    MTCSE
+  </text>
 </svg>
