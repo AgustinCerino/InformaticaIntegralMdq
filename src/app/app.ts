@@ -52,20 +52,20 @@ export class App implements AfterViewInit, OnDestroy {
 
   protected readonly services = [
     {
-      title: 'Reparacion de PCs y notebooks',
-      description: 'Diagnostico, cambio de partes, limpieza interna y optimizacion general.'
+      title: 'Administración de redes corporativas',
+      description: 'Diseño, implementación y mantenimiento de redes empresariales: VLANs, Wi-Fi profesional, VPN, QoS, monitoreo y documentación.'
     },
     {
-      title: 'Instalacion de software',
-      description: 'Windows, drivers, Office, programas esenciales y configuracion inicial.'
+      title: 'Ciberseguridad',
+      description: 'Controles técnicos para reducir riesgos reales: hardening, control de acceso, segmentación, respuesta ante incidentes y buenas prácticas.'
     },
     {
-      title: 'Eliminacion de virus',
-      description: 'Limpieza de malware, proteccion basica y mejora de rendimiento.'
+      title: 'Firewall perimetral a medida',
+      description: 'Firewalls de borde personalizados: políticas, filtrado, bloqueo, NAT, VPN, logs y alertas según tu operación.'
     },
     {
-      title: 'Redes y Wi-Fi',
-      description: 'Configuracion de router, repetidores, impresoras y red domestica.'
+      title: 'Desarrollos a medida',
+      description: 'Software y automatizaciones adaptadas a tu negocio: integraciones, paneles, procesos internos y herramientas específicas.'
     }
   ];
 
@@ -97,22 +97,22 @@ export class App implements AfterViewInit, OnDestroy {
   ];
 
   protected readonly highlights = [
-    'Atencion a domicilio y remota',
-    'Presupuestos claros antes de reparar',
-    'Respuesta rapida para urgencias',
-    'Soporte para hogares y pequenos negocios'
+    'Soporte remoto y on-site',
+    'Propuestas claras antes de ejecutar cambios',
+    'Respuesta rápida ante incidentes',
+    'Enfoque en continuidad operativa y seguridad'
   ];
 
   protected readonly heroStats = [
     { value: '24 hs', label: 'Respuesta inicial' },
     { value: '100%', label: 'Presupuesto previo' },
-    { value: 'PC + Red', label: 'Soporte integral' }
+    { value: 'Red + Seguridad', label: 'Soporte integral' }
   ];
 
   protected readonly heroChecks = [
-    'Limpieza y mantenimiento preventivo',
-    'Actualizacion de sistema y drivers',
-    'Configuracion de Wi-Fi, impresoras y perifericos'
+    'Administración y documentación de red (mapa, IPs, VLANs, accesos)',
+    'VPN segura para trabajo remoto (site-to-site / usuarios)',
+    'Hardening básico y segmentación por áreas/roles'
   ];
 
   protected readonly contactForm = this.fb.nonNullable.group({
