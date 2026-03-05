@@ -33,8 +33,8 @@
           <span class="brand-badge">MDQ</span>
         </h1>
         <p class="lead">
-Administración de redes corporativas, soporte técnico empresarial, ciberseguridad y firewalls perimetrales a medida.
-Implementamos soluciones estables, documentadas y escalables para tu operación.
+          Administración de redes corporativas, soporte técnico empresarial, ciberseguridad y firewalls
+          perimetrales a medida. Implementamos soluciones estables, documentadas y escalables para tu operación.
         </p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#contacto">Pedir presupuesto</a>
@@ -53,7 +53,7 @@ Implementamos soluciones estables, documentadas y escalables para tu operación.
         style="--reveal-delay: 120ms"
         aria-label="Resumen de servicio"
       >
-        <div class="status-pill">Atencion activa</div>
+        <div class="status-pill">Atención activa</div>
         <h2>Diagnóstico y plan de acción</h2>
         <p>
           Evaluamos tu infraestructura (red, Wi-Fi, accesos, seguridad y endpoints) y te devolvemos un plan priorizado: qué corregir primero, riesgos y mejoras de performance.
@@ -79,9 +79,11 @@ Implementamos soluciones estables, documentadas y escalables para tu operación.
 
   <section class="panel" id="servicios">
     <div class="panel-content narrow reveal-on-scroll" data-reveal>
-      <p class="eyebrow">Que hacemos</p>
+      <p class="eyebrow">Qué hacemos</p>
       <h2>Servicios principales</h2>
       <p class="lead">
+        Cubrimos el ciclo completo de infraestructura IT: diagnóstico, implementación, seguridad, monitoreo y soporte.
+        Priorizamos continuidad operativa y tiempos de respuesta concretos.
       </p>
       <div class="cards-grid">
         @for (service of services; track service.title; let i = $index) {
@@ -95,34 +97,36 @@ Implementamos soluciones estables, documentadas y escalables para tu operación.
   </section>
 
   <section class="panel accent" id="soluciones">
-    <div class="panel-content split reveal-on-scroll" data-reveal>
-      <div>
-        <p class="eyebrow">Formacion</p>
+    <div class="panel-content split certifications-layout reveal-on-scroll" data-reveal>
+      <div class="certifications-copy">
+        <p class="eyebrow">Formación</p>
         <h2>Certificaciones profesionales MikroTik</h2>
         <p class="lead">
-          En Informática Integral MDQ contamos con certificaciones oficiales de MikroTik que respaldan nuestra experiencia en diseño, implementación y seguridad de redes corporativas.
-
-Estas certificaciones garantizan que las soluciones que implementamos siguen estándares profesionales de networking y seguridad.
+          En Informática Integral MDQ contamos con certificaciones oficiales de MikroTik que respaldan nuestra
+          experiencia en diseño, implementación y seguridad de redes corporativas. Las soluciones que proponemos
+          siguen estándares profesionales de networking y seguridad.
         </p>
       </div>
-      <ul class="check-list reveal-on-scroll" data-reveal style="--reveal-delay: 100ms">
-        <h3>MikroTik Certified Network Associate (MTCNA)</h3>
-        <li>Configuración de routers MikroTik</li>
-        <li>Administración de redes IP</li>
-        <li>VLANs y segmentación de red</li>
-        <li>Routing y NAT</li>
-        <li>Configuración de Wi-Fi profesional</li>
-        <li>VPN y conectividad remota</li>
-      </ul>
 
-            <ul class="check-list reveal-on-scroll" data-reveal style="--reveal-delay: 100ms">
-        <h3>MikroTik Certified Security Engineer (MTCSE)</h3>
-        <li>Implementación de firewalls avanzados</li>
-        <li>Control y filtrado de tráfico</li>
-        <li>Políticas de seguridad perimetral</li>
-        <li>Protección contra accesos no autorizados</li>
-        <li>Monitoreo y análisis de tráfico de red</li>
-      </ul>
+      <div class="cert-grid">
+        @for (certification of certifications; track certification.code; let i = $index) {
+          <article
+            class="cert-card reveal-on-scroll"
+            data-reveal
+            [style.--reveal-delay]="(i * 90 + 100) + 'ms'"
+          >
+            <p class="cert-code">{{ certification.code }}</p>
+            <h3>{{ certification.title }}</h3>
+            <p class="cert-summary">{{ certification.summary }}</p>
+
+            <ul class="check-list cert-list">
+              @for (topic of certification.topics; track topic) {
+                <li>{{ topic }}</li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
     </div>
   </section>
 
@@ -131,7 +135,8 @@ Estas certificaciones garantizan que las soluciones que implementamos siguen est
       <p class="eyebrow">Clientes</p>
       <h2>Empresas y profesionales que confiaron en nosotros</h2>
       <p class="lead">
-
+        Experiencias de trabajo en rubros con alta exigencia operativa. Cada implementación se adapta a la realidad
+        del cliente y queda documentada para facilitar soporte y crecimiento.
       </p>
 
       <div class="clients-grid">
@@ -144,7 +149,9 @@ Estas certificaciones garantizan que las soluciones que implementamos siguen est
             <div class="client-body">
               <span class="client-chip">{{ client.category }}</span>
               <h3>{{ client.name }}</h3>
-              <p class="client-work">{{ client.work }}</p>
+              @if (client.work) {
+                <p class="client-work">{{ client.work }}</p>
+              }
             </div>
           </article>
         }
@@ -158,6 +165,8 @@ Estas certificaciones garantizan que las soluciones que implementamos siguen est
         <p class="eyebrow">Contacto</p>
         <h2>Consultanos y te respondemos con un presupuesto inicial</h2>
         <p class="lead">
+          Contanos tu situación actual y objetivo técnico. Te devolvemos una propuesta inicial con prioridades,
+          alcance y próximos pasos.
         </p>
       </div>
 
@@ -231,6 +240,12 @@ Estas certificaciones garantizan que las soluciones que implementamos siguen est
             </button>
             <p class="form-note">La consulta se envia por correo a informaticaintegralmdq@gmail.com.</p>
           </div>
+
+          <ul class="trust-list" aria-label="Compromisos de atención">
+            @for (item of contactTrust; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
 
           @if (submitSuccess()) {
             <p class="form-success" role="status" aria-live="polite">

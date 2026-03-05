@@ -45,7 +45,7 @@ export class App implements AfterViewInit, OnDestroy {
   protected readonly navItems = [
     { id: 'inicio', label: 'Inicio' },
     { id: 'servicios', label: 'Servicios' },
-    { id: 'soluciones', label: 'Soluciones' },
+    { id: 'soluciones', label: 'Certificaciones' },
     { id: 'clientes', label: 'Clientes' },
     { id: 'contacto', label: 'Contacto' }
   ];
@@ -73,26 +73,54 @@ export class App implements AfterViewInit, OnDestroy {
     {
       name: 'Farmacias Riadigos',
       category: 'Salud',
-      work: '',
+      work: 'Unificación de red entre sucursales, segmentación por áreas y hardening de acceso para mejorar continuidad operativa.',
       image: 'clientes/riadigos.png'
     },
     {
       name: 'Farmacias Palkin',
       category: 'Salud',
-      work: '',
+      work: 'Rediseño de conectividad interna, estabilización Wi-Fi y soporte de incidentes críticos en puestos de atención.',
       image: 'clientes/palkin2.jpg'
     },
     {
       name: 'Hotel Club del Golf',
       category: 'Hoteleria',
-      work: '',
+      work: 'Optimización de red para recepción y administración, con mejoras de seguridad perimetral y accesos remotos.',
       image: 'clientes/clubdelgolfhotel.jpg'
     },
-        {
+    {
       name: 'Coomarpes',
       category: 'Pesca',
-      work: '',
+      work: 'Soporte técnico y ordenamiento de infraestructura IT para operación administrativa y comunicaciones internas.',
       image: 'clientes/coomarpes.png'
+    }
+  ];
+
+  protected readonly certifications = [
+    {
+      title: 'MikroTik Certified Network Associate',
+      code: 'MTCNA',
+      summary: 'Base sólida en operación y arquitectura de redes MikroTik.',
+      topics: [
+        'Configuración de routers MikroTik',
+        'Administración de redes IP',
+        'VLANs y segmentación de red',
+        'Routing, NAT y conectividad WAN',
+        'Wi-Fi profesional',
+        'VPN y acceso remoto seguro'
+      ]
+    },
+    {
+      title: 'MikroTik Certified Security Engineer',
+      code: 'MTCSE',
+      summary: 'Implementación de controles avanzados de seguridad de red.',
+      topics: [
+        'Firewalls avanzados y políticas por riesgo',
+        'Filtrado y control de tráfico',
+        'Seguridad perimetral',
+        'Protección contra accesos no autorizados',
+        'Monitoreo y análisis de eventos'
+      ]
     }
   ];
 
@@ -113,6 +141,12 @@ export class App implements AfterViewInit, OnDestroy {
     'Administración y documentación de red (mapa, IPs, VLANs, accesos)',
     'VPN segura para trabajo remoto (site-to-site / usuarios)',
     'Hardening básico y segmentación por áreas/roles'
+  ];
+
+  protected readonly contactTrust = [
+    'Respuesta inicial dentro de las 24 hs hábiles.',
+    'No compartimos tus datos con terceros.',
+    'Propuesta técnica clara, por etapas y con prioridades.'
   ];
 
   protected readonly contactForm = this.fb.nonNullable.group({
