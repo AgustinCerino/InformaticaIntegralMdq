@@ -495,6 +495,9 @@ h3 {
 }
 
 .cert-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   padding: 1rem;
   border-radius: 1rem;
   background: rgba(255, 255, 255, 0.03);
@@ -511,35 +514,44 @@ h3 {
 }
 
 .cert-logo-wrap {
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
+  min-height: 94px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   border-radius: 0.75rem;
   background: transparent;
   border: 0;
   padding: 0;
+  margin-bottom: 0.8rem;
 }
 
 .cert-logo {
   display: block;
-  height: 56px;
+  height: 64px;
   width: auto;
   max-width: min(260px, 100%);
 }
 
+.cert-logo.cert-logo-large {
+  height: 78px;
+  max-width: min(320px, 100%);
+}
+
 .cert-card h3 {
-  margin-top: 0.72rem;
+  margin-top: 0;
   font-size: 1.02rem;
 }
 
 .cert-summary {
-  margin: 0.4rem 0 0;
+  margin: 0.55rem 0 0;
   color: #b7c6d6;
   line-height: 1.45;
   font-size: 0.9rem;
 }
 
 .cert-list {
-  margin-top: 0.85rem;
+  margin-top: 1.05rem;
   padding: 0;
   background: transparent;
   border: 0;
@@ -557,6 +569,7 @@ h3 {
 
 .check-list {
   margin: 0;
+  margin-top: 1rem;
   padding: 1rem;
   list-style: none;
   border-radius: 1rem;
@@ -1097,8 +1110,13 @@ h3 {
   }
 
   .cert-logo {
-    height: 50px;
+    height: 54px;
     max-width: min(230px, 100%);
+  }
+
+  .cert-logo.cert-logo-large {
+    height: 66px;
+    max-width: min(280px, 100%);
   }
 
   .clients-track-group .client-card {

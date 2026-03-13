@@ -118,6 +118,7 @@
             <div class="cert-logo-wrap">
               <img
                 class="cert-logo"
+                [class.cert-logo-large]="certification.code === 'zcp'"
                 [src]="certification.logo"
                 [alt]="'Logo de certificación ' + certification.code"
                 loading="lazy"
