@@ -60,8 +60,8 @@ export class App implements AfterViewInit, OnDestroy {
       description: 'Controles técnicos para reducir riesgos reales: hardening, control de acceso, segmentación, respuesta ante incidentes y buenas prácticas.'
     },
     {
-      title: 'Firewall perimetral a medida',
-      description: 'Firewalls de borde personalizados: políticas, filtrado, bloqueo, NAT, VPN, logs y alertas según tu operación.'
+      title: 'Monitoreo y soporte técnico',
+      description: 'Monitoreo remoto y continuo con Zabbix para detectar fallas, alertas e incidencias en la infraestructura. Soporte técnico de hardware y software con respuesta ágil ante problemas operativos.'
     },
     {
       title: 'Desarrollos a medida',
@@ -122,6 +122,19 @@ export class App implements AfterViewInit, OnDestroy {
         'Seguridad perimetral',
         'Protección contra accesos no autorizados',
         'Monitoreo y análisis de eventos'
+      ]
+    },
+        {
+      title: 'Zabbix Certified Professional',
+      code: 'zcp',
+      logo: 'certificaciones/zabbix-training-badge_professional-1024x1024.webp',
+      summary: 'Capacidad avanzada para desplegar, asegurar y escalar plataformas de monitoreo con Zabbix.',
+      topics: [
+        'Implementación y hardening de Zabbix',
+        'Cifrado entre componentes',
+        'Proxies para monitoreo distribuido',
+        'Monitoreo de sistemas, redes y SNMP',
+        'Alta disponibilidad y recuperación ante fallos'
       ]
     }
   ];
