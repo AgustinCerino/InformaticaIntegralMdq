@@ -272,11 +272,6 @@
             <p class="form-note">La consulta se envia por correo a informaticaintegralmdq@gmail.com.</p>
           </div>
 
-          <ul class="trust-list" aria-label="Compromisos de atención">
-            @for (item of contactTrust; track item) {
-              <li>{{ item }}</li>
-            }
-          </ul>
 
           @if (submitSuccess()) {
             <p class="form-success" role="status" aria-live="polite">
@@ -299,6 +294,10 @@
         </div>
       </div>
     </div>
+
+    <footer class="site-footer">
+      <p>Powered by Informatica Integral MDQ ©</p>
+    </footer>
   </section>
 
 <a
@@ -315,4 +314,5 @@
     </span>
     <span class="wa-label">WhatsApp</span>
   </a>
+
 </main>

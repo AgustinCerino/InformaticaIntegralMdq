@@ -1,6 +1,13 @@
 ﻿:host {
   --font-ui: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: var(--font-ui);
+  --card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.04));
+  --card-bg-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.055));
+  --card-border: rgba(255, 255, 255, 0.14);
+  --card-border-hover: rgba(143, 208, 255, 0.28);
+  --card-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
   display: block;
   color: #e7edf3;
   background: #07111f;
@@ -179,13 +186,11 @@
   border-radius: 1.25rem;
   padding: 1.1rem;
   background:
-    radial-gradient(circle at 90% 12%, rgba(143, 208, 255, 0.14), transparent 42%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.03));
-  border: 1px solid rgba(255, 255, 255, 0.1);
+    radial-gradient(circle at 90% 12%, rgba(143, 208, 255, 0.16), transparent 44%),
+    var(--card-bg);
+  border: 1px solid var(--card-border);
   backdrop-filter: blur(6px);
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  box-shadow: var(--card-shadow);
 }
 
 .hero-card h2 {
@@ -210,8 +215,9 @@
   gap: 0.18rem;
   padding: 0.65rem;
   border-radius: 0.8rem;
-  background: rgba(255, 255, 255, 0.028);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .stat-value {
@@ -440,8 +446,9 @@ h3 {
   border-radius: 999px;
   font-size: 0.8rem;
   color: #d9e6f3;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
 }
 
 .cards-grid {
@@ -454,9 +461,9 @@ h3 {
 .service-card {
   padding: 1rem;
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.028);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
   transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
 }
 
@@ -469,8 +476,8 @@ h3 {
 .service-card:hover,
 .service-card:focus-within {
   transform: translateY(-2px);
-  border-color: rgba(143, 208, 255, 0.16);
-  background: rgba(255, 255, 255, 0.038);
+  border-color: var(--card-border-hover);
+  background: var(--card-bg-hover);
 }
 
 .accent {
@@ -509,17 +516,17 @@ h3 {
   align-items: stretch;
   padding: 1rem;
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
   transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
 }
 
 .cert-card:hover,
 .cert-card:focus-within {
   transform: translateY(-2px);
-  border-color: rgba(143, 208, 255, 0.16);
-  background: rgba(255, 255, 255, 0.038);
+  border-color: var(--card-border-hover);
+  background: var(--card-bg-hover);
 }
 
 .cert-logo-wrap {
@@ -582,8 +589,9 @@ h3 {
   padding: 1rem;
   list-style: none;
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .check-list li {
@@ -619,8 +627,9 @@ h3 {
   align-items: center;
   padding: 0.9rem;
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
 }
 
 .step-number {
@@ -720,17 +729,17 @@ h3 {
   grid-template-rows: 170px auto;
   border-radius: 1rem;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
   transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
 }
 
 .client-card:hover,
 .client-card:focus-within {
   transform: translateY(-2px);
-  border-color: rgba(143, 208, 255, 0.16);
-  background: rgba(255, 255, 255, 0.038);
+  border-color: var(--card-border-hover);
+  background: var(--card-bg-hover);
 }
 
 .client-media {
@@ -775,7 +784,12 @@ h3 {
 }
 
 .contact {
-  padding-bottom: 5.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1.2rem;
+  padding-bottom: 0.75rem;
 }
 
 .contact-layout {
@@ -799,12 +813,20 @@ h3 {
 .contact-form-card,
 .contact-card {
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   backdrop-filter: blur(6px);
-  box-shadow:
-    0 18px 46px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  box-shadow: var(--card-shadow);
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.contact-form-card:hover,
+.contact-form-card:focus-within,
+.contact-card:hover,
+.contact-card:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--card-border-hover);
+  background: var(--card-bg-hover);
 }
 
 .contact-form-card {
@@ -974,7 +996,7 @@ h3 {
 .whatsapp-fab {
   position: fixed;
   right: 1rem;
-  bottom: 1rem;
+  bottom: 4.25rem;
   z-index: 35;
   display: inline-flex;
   align-items: center;
@@ -1020,6 +1042,19 @@ h3 {
   font-weight: 800;
   letter-spacing: 0.01em;
   font-size: 0.9rem;
+}
+
+.site-footer {
+  margin-top: 1.2rem;
+  padding: 0.85rem 1rem 0.25rem;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #9eb4c9;
+  letter-spacing: 0.02em;
 }
 
 @keyframes fabPulse {
@@ -1163,8 +1198,12 @@ h3 {
 
   .whatsapp-fab {
     right: 0.75rem;
-    bottom: 0.75rem;
+    bottom: 3.6rem;
     padding-right: 0.7rem;
+  }
+
+  .site-footer {
+    padding-bottom: 0.2rem;
   }
 
   .wa-label {

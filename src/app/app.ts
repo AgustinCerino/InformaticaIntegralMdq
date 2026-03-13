@@ -158,12 +158,6 @@ export class App implements AfterViewInit, OnDestroy {
     'Hardening básico y segmentación por áreas/roles'
   ];
 
-  protected readonly contactTrust = [
-    'Respuesta inicial dentro de las 24 hs hábiles.',
-    'No compartimos tus datos con terceros.',
-    'Propuesta técnica clara, por etapas y con prioridades.'
-  ];
-
   protected readonly contactForm = this.fb.nonNullable.group({
     nombre: ['', [Validators.required, Validators.minLength(2)]],
     telefono: ['', [Validators.required, Validators.minLength(6)]],
