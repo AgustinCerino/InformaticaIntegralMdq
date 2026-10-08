@@ -1,4 +1,4 @@
-import {
+﻿import {
   AfterViewInit,
   Component,
   ElementRef,
@@ -60,8 +60,8 @@ export class App implements AfterViewInit, OnDestroy {
       description: 'Controles técnicos para reducir riesgos reales: hardening, control de acceso, segmentación, respuesta ante incidentes y buenas prácticas.'
     },
     {
-      title: 'Firewall perimetral a medida',
-      description: 'Firewalls de borde personalizados: políticas, filtrado, bloqueo, NAT, VPN, logs y alertas según tu operación.'
+      title: 'Monitoreo y soporte tecnico#######',
+      description:  'zabix....'
     },
     {
       title: 'Desarrollos a medida',
@@ -122,6 +122,15 @@ export class App implements AfterViewInit, OnDestroy {
         'Seguridad perimetral',
         'Protección contra accesos no autorizados',
         'Monitoreo y análisis de eventos'
+      ]
+    },
+        {
+      title: 'Zabbix Certified Professional Exam',
+      code: '',
+      logo: '',
+      summary: '',
+      topics: [
+
       ]
     }
   ];
