@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.angular/
+.audit-*/
+.og-*/
+package-lock.json
+public/**/*.png
+public/**/*.jpg
+public/**/*.jpeg
+public/**/*.webp
+public/**/*.ico
