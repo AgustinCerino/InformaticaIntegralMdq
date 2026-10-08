@@ -100,11 +100,11 @@
     <div class="panel-content split certifications-layout reveal-on-scroll" data-reveal>
       <div class="certifications-copy">
         <p class="eyebrow">Formación</p>
-        <h2>Certificaciones profesionales MikroTik</h2>
+        <h2>Certificaciones profesionales</h2>
         <p class="lead">
-          En Informática Integral MDQ contamos con certificaciones oficiales de MikroTik que respaldan nuestra
-          experiencia en diseño, implementación y seguridad de redes corporativas. Las soluciones que proponemos
-          siguen estándares profesionales de networking y seguridad.
+          En Informática Integral MDQ contamos con certificaciones oficiales 
+          en networking, seguridad y monitoreo que respaldan nuestra experiencia en diseño, 
+          implementación y operación de infraestructura IT.
         </p>
       </div>
 
@@ -118,6 +118,7 @@
             <div class="cert-logo-wrap">
               <img
                 class="cert-logo"
+                [class.cert-logo-large]="certification.code === 'zcp'"
                 [src]="certification.logo"
                 [alt]="'Logo de certificación ' + certification.code"
                 loading="lazy"
@@ -271,11 +272,6 @@
             <p class="form-note">La consulta se envia por correo a informaticaintegralmdq@gmail.com.</p>
           </div>
 
-          <ul class="trust-list" aria-label="Compromisos de atención">
-            @for (item of contactTrust; track item) {
-              <li>{{ item }}</li>
-            }
-          </ul>
 
           @if (submitSuccess()) {
             <p class="form-success" role="status" aria-live="polite">
@@ -298,6 +294,10 @@
         </div>
       </div>
     </div>
+
+    <footer class="site-footer">
+      <p>Powered by Informatica Integral MDQ ©</p>
+    </footer>
   </section>
 
 <a
@@ -314,4 +314,5 @@
     </span>
     <span class="wa-label">WhatsApp</span>
   </a>
+
 </main>

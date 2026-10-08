@@ -60,8 +60,8 @@ export class App implements AfterViewInit, OnDestroy {
       description: 'Controles técnicos para reducir riesgos reales: hardening, control de acceso, segmentación, respuesta ante incidentes y buenas prácticas.'
     },
     {
-      title: 'Monitoreo y soporte tecnico#######',
-      description:  'zabix....'
+      title: 'Monitoreo y soporte técnico',
+      description: 'Monitoreo remoto y continuo con Zabbix para detectar fallas, alertas e incidencias en la infraestructura. Soporte técnico de hardware y software con respuesta ágil ante problemas operativos.'
     },
     {
       title: 'Desarrollos a medida',
@@ -125,12 +125,16 @@ export class App implements AfterViewInit, OnDestroy {
       ]
     },
         {
-      title: 'Zabbix Certified Professional Exam',
-      code: '',
-      logo: '',
-      summary: '',
+      title: 'Zabbix Certified Professional',
+      code: 'zcp',
+      logo: 'certificaciones/zabbix-training-badge_professional-1024x1024.webp',
+      summary: 'Capacidad avanzada para desplegar, asegurar y escalar plataformas de monitoreo con Zabbix.',
       topics: [
-
+        'Implementación y hardening de Zabbix',
+        'Cifrado entre componentes',
+        'Proxies para monitoreo distribuido',
+        'Monitoreo de sistemas, redes y SNMP',
+        'Alta disponibilidad y recuperación ante fallos'
       ]
     }
   ];
@@ -152,12 +156,6 @@ export class App implements AfterViewInit, OnDestroy {
     'Administración y documentación de red (mapa, IPs, VLANs, accesos)',
     'VPN segura para trabajo remoto (site-to-site / usuarios)',
     'Hardening básico y segmentación por áreas/roles'
-  ];
-
-  protected readonly contactTrust = [
-    'Respuesta inicial dentro de las 24 hs hábiles.',
-    'No compartimos tus datos con terceros.',
-    'Propuesta técnica clara, por etapas y con prioridades.'
   ];
 
   protected readonly contactForm = this.fb.nonNullable.group({
