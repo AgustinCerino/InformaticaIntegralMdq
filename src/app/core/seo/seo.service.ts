@@ -2,6 +2,9 @@ import { DOCUMENT } from '@angular/common';
 import { Injectable, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
+const PRODUCTION_ORIGIN = 'https://informaticaintegralmdq.vercel.app';
+const DEFAULT_SOCIAL_IMAGE = `${PRODUCTION_ORIGIN}/og-cover.png`;
+
 export interface SeoConfig {
   readonly title: string;
   readonly description: string;
@@ -17,7 +20,10 @@ export class SeoService {
   private readonly title = inject(Title);
 
   update(config: SeoConfig): void {
-    const image = config.image ?? '/og-cover.png';
+    const pageUrl = new URL(config.path, `${PRODUCTION_ORIGIN}/`).href;
+    const image = config.image
+      ? new URL(config.image, `${PRODUCTION_ORIGIN}/`).href
+      : DEFAULT_SOCIAL_IMAGE;
     this.title.setTitle(config.title);
     this.meta.updateTag({ name: 'description', content: config.description });
     this.meta.updateTag({
@@ -30,6 +36,7 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:title', content: config.title });
     this.meta.updateTag({ property: 'og:description', content: config.description });
     this.meta.updateTag({ property: 'og:image', content: image });
+    this.meta.updateTag({ property: 'og:url', content: pageUrl });
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
     this.meta.updateTag({ name: 'twitter:title', content: config.title });
     this.meta.updateTag({ name: 'twitter:description', content: config.description });
@@ -41,6 +48,6 @@ export class SeoService {
       canonical.rel = 'canonical';
       this.document.head.appendChild(canonical);
     }
-    canonical.href = config.path;
+    canonical.href = pageUrl;
   }
 }

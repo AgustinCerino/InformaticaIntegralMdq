@@ -42,8 +42,8 @@ import { business } from '../../data/site-content';
       <section>
         <h2>Datos que recopilamos</h2>
         <p>
-          Nombre, teléfono, email, servicio de interés y el mensaje que decidas incluir. No
-          solicitamos datos sensibles.
+          Nombre, al menos un medio de contacto (teléfono o email), servicio de interés y el mensaje
+          que decidas incluir. No solicitamos datos sensibles.
         </p>
       </section>
 

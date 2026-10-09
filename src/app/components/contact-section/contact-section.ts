@@ -1,11 +1,23 @@
 import { Component, ElementRef, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { ContactApiService } from '../../core/contact/contact-api.service';
 import { business, contactServiceOptions } from '../../data/site-content';
 
 type ContactControlName = 'nombre' | 'telefono' | 'email' | 'servicio' | 'mensaje' | 'privacidad';
+
+function requirePhoneOrEmail(control: AbstractControl): ValidationErrors | null {
+  const phone = String(control.get('telefono')?.value ?? '').trim();
+  const email = String(control.get('email')?.value ?? '').trim();
+  return phone || email ? null : { contactChannelRequired: true };
+}
 
 @Component({
   selector: 'app-contact-section',
@@ -63,6 +75,8 @@ type ContactControlName = 'nombre' | 'telefono' | 'email' | 'servicio' | 'mensaj
                 formControlName="nombre"
                 autocomplete="name"
                 maxlength="80"
+                required
+                aria-required="true"
                 [attr.aria-invalid]="isInvalid('nombre')"
                 [attr.aria-describedby]="isInvalid('nombre') ? 'contact-name-error' : null"
               />
@@ -74,7 +88,7 @@ type ContactControlName = 'nombre' | 'telefono' | 'email' | 'servicio' | 'mensaj
             </div>
 
             <div class="field">
-              <label for="contact-phone">Teléfono o WhatsApp *</label>
+              <label for="contact-phone">Teléfono o WhatsApp</label>
               <input
                 id="contact-phone"
                 type="tel"
@@ -84,15 +98,18 @@ type ContactControlName = 'nombre' | 'telefono' | 'email' | 'servicio' | 'mensaj
                 maxlength="32"
                 placeholder="223 555 0000"
                 [attr.aria-invalid]="isInvalid('telefono')"
-                [attr.aria-describedby]="isInvalid('telefono') ? 'contact-phone-error' : null"
+                [attr.aria-describedby]="contactDescribedBy('telefono')"
               />
-              @if (isInvalid('telefono')) {
+              <p id="contact-channel-help" class="field-guidance">
+                Completá al menos teléfono o email.
+              </p>
+              @if (hasFormatError('telefono')) {
                 <p id="contact-phone-error" class="field-error">Ingresá un teléfono válido.</p>
               }
             </div>
 
             <div class="field">
-              <label for="contact-email">Email *</label>
+              <label for="contact-email">Email</label>
               <input
                 id="contact-email"
                 type="email"
@@ -101,10 +118,15 @@ type ContactControlName = 'nombre' | 'telefono' | 'email' | 'servicio' | 'mensaj
                 maxlength="254"
                 placeholder="nombre&#64;empresa.com"
                 [attr.aria-invalid]="isInvalid('email')"
-                [attr.aria-describedby]="isInvalid('email') ? 'contact-email-error' : null"
+                [attr.aria-describedby]="contactDescribedBy('email')"
               />
-              @if (isInvalid('email')) {
+              @if (hasFormatError('email')) {
                 <p id="contact-email-error" class="field-error">Ingresá un email válido.</p>
+              }
+              @if (isContactChannelMissing()) {
+                <p id="contact-channel-error" class="field-error">
+                  Ingresá un teléfono o un email para que podamos responderte.
+                </p>
               }
             </div>
 
@@ -113,6 +135,8 @@ type ContactControlName = 'nombre' | 'telefono' | 'email' | 'servicio' | 'mensaj
               <select
                 id="contact-service"
                 formControlName="servicio"
+                required
+                aria-required="true"
                 [attr.aria-invalid]="isInvalid('servicio')"
               >
                 @for (service of serviceOptions; track service) {
@@ -128,6 +152,8 @@ type ContactControlName = 'nombre' | 'telefono' | 'email' | 'servicio' | 'mensaj
                 rows="5"
                 formControlName="mensaje"
                 maxlength="2000"
+                required
+                aria-required="true"
                 placeholder="Situación actual, cantidad aproximada de equipos o sedes y objetivo principal."
                 [attr.aria-invalid]="isInvalid('mensaje')"
                 [attr.aria-describedby]="
@@ -164,15 +190,24 @@ type ContactControlName = 'nombre' | 'telefono' | 'email' | 'servicio' | 'mensaj
                   id="contact-privacy"
                   type="checkbox"
                   formControlName="privacidad"
+                  required
+                  aria-required="true"
                   [attr.aria-invalid]="isInvalid('privacidad')"
+                  [attr.aria-describedby]="isInvalid('privacidad') ? 'contact-privacy-error' : null"
                 />
                 <span>
                   Acepto que mis datos se usen únicamente para responder esta consulta. Leí la
-                  <a routerLink="/politica-de-privacidad">política de privacidad</a>.
+                  <a routerLink="/politica-de-privacidad">política de privacidad</a>.<span
+                    aria-hidden="true"
+                  >
+                    *</span
+                  >
                 </span>
               </label>
               @if (isInvalid('privacidad')) {
-                <p class="field-error">Necesitamos tu consentimiento para enviar la consulta.</p>
+                <p id="contact-privacy-error" class="field-error">
+                  Necesitamos tu consentimiento para enviar la consulta.
+                </p>
               }
             </div>
           </div>
@@ -210,27 +245,50 @@ export class ContactSection {
   protected readonly submitError = signal('');
   protected readonly isSubmitting = signal(false);
 
-  protected readonly contactForm = this.fb.nonNullable.group({
-    nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
-    telefono: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(32),
-        Validators.pattern(/^[0-9+().\-\s]+$/),
+  protected readonly contactForm = this.fb.nonNullable.group(
+    {
+      nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(80)]],
+      telefono: [
+        '',
+        [Validators.minLength(6), Validators.maxLength(32), Validators.pattern(/^[0-9+().\-\s]+$/)],
       ],
-    ],
-    email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
-    servicio: [contactServiceOptions[0], [Validators.required]],
-    mensaje: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(2000)]],
-    website: [''],
-    privacidad: [false, [Validators.requiredTrue]],
-  });
+      email: ['', [Validators.email, Validators.maxLength(254)]],
+      servicio: [contactServiceOptions[0], [Validators.required]],
+      mensaje: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(2000)]],
+      website: [''],
+      privacidad: [false, [Validators.requiredTrue]],
+    },
+    { validators: requirePhoneOrEmail },
+  );
 
   protected isInvalid(controlName: ContactControlName): boolean {
     const control = this.contactForm.controls[controlName];
+    const interacted = control.touched || this.submitAttempted();
+    if ((controlName === 'telefono' || controlName === 'email') && this.isContactChannelMissing()) {
+      return true;
+    }
+    return control.invalid && interacted;
+  }
+
+  protected hasFormatError(controlName: 'telefono' | 'email'): boolean {
+    const control = this.contactForm.controls[controlName];
     return control.invalid && (control.touched || this.submitAttempted());
+  }
+
+  protected isContactChannelMissing(): boolean {
+    const interacted =
+      this.contactForm.controls.telefono.touched ||
+      this.contactForm.controls.email.touched ||
+      this.submitAttempted();
+    return this.contactForm.hasError('contactChannelRequired') && interacted;
+  }
+
+  protected contactDescribedBy(controlName: 'telefono' | 'email'): string {
+    const descriptions = ['contact-channel-help'];
+    if (this.hasFormatError(controlName))
+      descriptions.push(`contact-${controlName === 'telefono' ? 'phone' : 'email'}-error`);
+    if (this.isContactChannelMissing()) descriptions.push('contact-channel-error');
+    return descriptions.join(' ');
   }
 
   protected clearFeedback(): void {

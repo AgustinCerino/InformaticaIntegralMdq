@@ -71,6 +71,7 @@ Los textos de servicios, certificaciones, casos y datos comerciales se editan en
 
 El endpoint acepta únicamente JSON por `POST /api/contact` e incluye:
 
+- nombre, mensaje y consentimiento obligatorios, con teléfono o email como canales alternativos;
 - validación y longitudes máximas en cliente y servidor;
 - lista permitida de servicios;
 - escape de contenido HTML y validación de cabeceras de correo;

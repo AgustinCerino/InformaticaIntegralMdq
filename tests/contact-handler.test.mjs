@@ -1,6 +1,16 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { handleContactRequest } from '../src/server/contact-handler.mjs';
+import { handleContactRequest, validateContactPayload } from '../src/server/contact-handler.mjs';
+
+const validPayload = {
+  nombre: 'Empresa de prueba',
+  telefono: '+54 223 555 0000',
+  email: 'consulta@example.com',
+  servicio: 'Ciberseguridad',
+  mensaje: 'Necesitamos revisar la seguridad actual de la red.',
+  website: '',
+  startedAt: Date.now() - 5_000,
+};
 
 function responseMock() {
   return {
@@ -55,6 +65,24 @@ test('rejects malformed contact data before invoking SMTP', async () => {
   await handleContactRequest(req, res);
   assert.equal(res.statusCode, 400);
   assert.deepEqual(res.body, { ok: false, error: 'Revisá los datos ingresados.' });
+});
+
+test('accepts either phone or email and validates any provided contact channel', () => {
+  assert.ok(validateContactPayload({ ...validPayload, email: '' }));
+  assert.ok(validateContactPayload({ ...validPayload, telefono: '' }));
+  assert.equal(validateContactPayload({ ...validPayload, telefono: '', email: '' }), null);
+  assert.equal(
+    validateContactPayload({ ...validPayload, telefono: 'teléfono inválido', email: '' }),
+    null,
+  );
+  assert.equal(
+    validateContactPayload({ ...validPayload, telefono: '', email: 'correo-inválido' }),
+    null,
+  );
+  assert.equal(
+    validateContactPayload({ ...validPayload, telefono: '123', email: 'consulta@example.com' }),
+    null,
+  );
 });
 
 test('silently accepts honeypot submissions', async () => {

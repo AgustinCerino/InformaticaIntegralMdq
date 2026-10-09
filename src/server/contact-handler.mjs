@@ -83,7 +83,7 @@ function respond(res, status, body) {
   res.status(status).json(body);
 }
 
-function validatePayload(body) {
+export function validateContactPayload(body) {
   const nombre = text(body?.nombre, 80);
   const telefono = text(body?.telefono, 32);
   const email = text(body?.email, 254).toLowerCase();
@@ -95,8 +95,11 @@ function validatePayload(body) {
   if (website) return { bot: true };
   if (!Number.isFinite(startedAt) || Date.now() - startedAt < MIN_FORM_COMPLETION_MS) return null;
   if (nombre.length < 2 || nombre.length > 80 || /[\r\n\0]/.test(nombre)) return null;
-  if (!/^[0-9+().\-\s]{6,32}$/.test(telefono)) return null;
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || /[\r\n\0]/.test(email)) return null;
+  if (!telefono && !email) return null;
+  if (telefono && !/^[0-9+().\-\s]{6,32}$/.test(telefono)) return null;
+  if (email && (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || /[\r\n\0]/.test(email))) {
+    return null;
+  }
   if (!allowedServices.has(servicio)) return null;
   if (mensaje.length < 12 || mensaje.length > 2000 || /\0/.test(mensaje)) return null;
 
@@ -155,7 +158,7 @@ export async function handleContactRequest(req, res) {
     return;
   }
 
-  const payload = validatePayload(req.body);
+  const payload = validateContactPayload(req.body);
   if (payload?.bot) {
     respond(res, 200, { ok: true });
     return;
@@ -183,15 +186,15 @@ export async function handleContactRequest(req, res) {
     await transporter.sendMail({
       from: `"Formulario web · Informática Integral MDQ" <${smtpUser}>`,
       to: recipient,
-      replyTo: { name: payload.nombre, address: payload.email },
+      replyTo: payload.email ? { name: payload.nombre, address: payload.email } : undefined,
       subject: `Nueva consulta web · ${payload.nombre}`,
       text: [
         'Nueva consulta recibida desde el sitio web.',
         '',
         `Fecha: ${submittedAt}`,
         `Nombre: ${payload.nombre}`,
-        `Teléfono: ${payload.telefono}`,
-        `Email: ${payload.email}`,
+        `Teléfono: ${payload.telefono || 'No informado'}`,
+        `Email: ${payload.email || 'No informado'}`,
         `Servicio: ${payload.servicio}`,
         '',
         'Mensaje:',
@@ -201,8 +204,8 @@ export async function handleContactRequest(req, res) {
         <h2>Nueva consulta web</h2>
         <p><strong>Fecha:</strong> ${escapeHtml(submittedAt)}</p>
         <p><strong>Nombre:</strong> ${escapeHtml(payload.nombre)}</p>
-        <p><strong>Teléfono:</strong> ${escapeHtml(payload.telefono)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
+        <p><strong>Teléfono:</strong> ${escapeHtml(payload.telefono || 'No informado')}</p>
+        <p><strong>Email:</strong> ${escapeHtml(payload.email || 'No informado')}</p>
         <p><strong>Servicio:</strong> ${escapeHtml(payload.servicio)}</p>
         <p><strong>Mensaje:</strong></p>
         <p>${escapeHtml(payload.mensaje).replace(/\n/g, '<br>')}</p>

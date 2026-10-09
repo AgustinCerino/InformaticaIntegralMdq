@@ -1,4 +1,5 @@
-import { Component, HostListener, input, output, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, HostListener, inject, input, output, signal } from '@angular/core';
 import { navItems } from '../../data/site-content';
 
 @Component({
@@ -26,7 +27,7 @@ import { navItems } from '../../data/site-content';
           aria-controls="primary-navigation"
           [attr.aria-expanded]="menuOpen()"
           [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'"
-          (click)="menuOpen.update((open) => !open)"
+          (click)="toggleMenu()"
         >
           <span></span><span></span><span></span>
         </button>
@@ -56,6 +57,8 @@ import { navItems } from '../../data/site-content';
   `,
 })
 export class SiteHeader {
+  private readonly document = inject(DOCUMENT);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   readonly activeSection = input.required<string>();
   readonly sectionSelected = output<string>();
   protected readonly items = navItems;
@@ -66,8 +69,59 @@ export class SiteHeader {
     this.menuOpen.set(false);
   }
 
-  @HostListener('document:keydown.escape')
-  protected closeMenu(): void {
-    this.menuOpen.set(false);
+  protected toggleMenu(): void {
+    this.menuOpen.update((open) => !open);
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  protected handleDocumentKeydown(event: KeyboardEvent): void {
+    if (!this.menuOpen()) return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.menuOpen.set(false);
+      this.menuButton()?.focus();
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+
+    const focusableElements = this.menuFocusableElements();
+    if (!focusableElements.length) return;
+
+    const activeElement = this.document.activeElement;
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements.at(-1)!;
+
+    if (!focusableElements.includes(activeElement as HTMLElement)) {
+      event.preventDefault();
+      firstElement.focus();
+      return;
+    }
+
+    if (event.shiftKey && activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftKey && activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  }
+
+  @HostListener('window:resize')
+  protected closeMobileMenuAboveBreakpoint(): void {
+    if ((this.document.defaultView?.innerWidth ?? 0) > 820) this.menuOpen.set(false);
+  }
+
+  private menuButton(): HTMLButtonElement | null {
+    return this.host.nativeElement.querySelector<HTMLButtonElement>('.menu-toggle');
+  }
+
+  private menuFocusableElements(): HTMLElement[] {
+    const button = this.menuButton();
+    const navigationLinks = Array.from(
+      this.host.nativeElement.querySelectorAll<HTMLElement>('#primary-navigation a[href]'),
+    );
+    return button ? [button, ...navigationLinks] : navigationLinks;
   }
 }
