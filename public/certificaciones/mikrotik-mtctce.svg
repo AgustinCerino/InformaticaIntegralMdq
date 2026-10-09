@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 320" role="img" aria-labelledby="title desc">
+  <title id="title">MikroTik MTCTCE</title>
+  <desc id="desc">Insignia de certificación MikroTik MTCTCE.</desc>
+  <defs>
+    <clipPath id="badge-clip">
+      <rect x="8" y="8" width="604" height="304" rx="44" ry="44"/>
+    </clipPath>
+  </defs>
+
+  <rect x="8" y="8" width="604" height="304" rx="44" ry="44" fill="#ffffff" stroke="#b45309" stroke-width="4"/>
+  <rect x="8" y="180" width="604" height="132" fill="#d97706" clip-path="url(#badge-clip)"/>
+
+  <g transform="translate(58 58)" fill="none" stroke="#171717" stroke-width="5" stroke-linecap="round">
+    <path d="M144 13c8 15 20 24 37 28"/>
+    <path d="M156 3c8 15 19 24 34 29"/>
+    <path d="M168 -6c8 14 19 22 33 27"/>
+  </g>
+
+  <text
+    x="308"
+    y="142"
+    text-anchor="middle"
+    fill="#171717"
+    font-family="Segoe UI, Arial, sans-serif"
+    font-size="84"
+    font-style="italic"
+    font-weight="700"
+    letter-spacing="-1.2"
+  >
+    MikroTik
+  </text>
+
+  <text
+    x="308"
+    y="260"
+    text-anchor="middle"
+    fill="#ffffff"
+    font-family="Segoe UI, Arial, sans-serif"
+    font-size="68"
+    font-weight="800"
+    letter-spacing="2"
+  >
+    MTCTCE
+  </text>
+</svg>

@@ -136,6 +136,35 @@ export const certifications: readonly Certification[] = [
     ],
   },
   {
+    title: 'MikroTik Certified Traffic Control Engineer',
+    code: 'MTCTCE',
+    logo: 'certificaciones/mikrotik-mtctce.svg',
+    width: 620,
+    height: 320,
+    summary:
+      'Gestión avanzada del tráfico para priorizar servicios y aprovechar mejor el ancho de banda.',
+    topics: [
+      'Flujo de paquetes y connection tracking',
+      'Firewall, NAT y mangle',
+      'QoS, colas simples y queue trees',
+      'Priorización, PCQ y control de ancho de banda',
+    ],
+  },
+  {
+    title: 'MikroTik Certified IPv6 Engineer',
+    code: 'MTCIPv6E',
+    logo: 'certificaciones/mikrotik-mtcipv6e.svg',
+    width: 620,
+    height: 320,
+    summary: 'Diseño, implementación y protección de redes IPv6 sobre RouterOS.',
+    topics: [
+      'Direccionamiento y subnetting IPv6',
+      'SLAAC, DHCPv6 y Neighbor Discovery',
+      'Routing, firewall e IPsec para IPv6',
+      'Dual stack, túneles e interoperabilidad',
+    ],
+  },
+  {
     title: 'Zabbix Certified Professional',
     code: 'ZCP',
     logo: 'certificaciones/zabbix-training-badge_professional-1024x1024.webp',
